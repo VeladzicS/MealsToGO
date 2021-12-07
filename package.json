@@ -15,6 +15,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^5.11.15",
     "@react-navigation/native": "^5.9.8",
+    "camelize": "^1.0.0",
     "eslint": "^7.32.0",
     "expo": "~43.0.2",
     "expo-font": "~10.0.3",

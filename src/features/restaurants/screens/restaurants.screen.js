@@ -15,7 +15,7 @@ export const RestaurantsScreen = () => (
       <Searchbar />
     </SearchContainer>
     <FlatList
-      data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
+      data={[{ name: 123 }, { name: 2321321 }, { name: 342142 }]}
       renderItem={() => <RestaurantsInfoCard />}
       keyExtractor={(item) => item.name}
       contentContainerStyle={{ padding: 16 }}

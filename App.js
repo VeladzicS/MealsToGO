@@ -15,6 +15,8 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 const Tab = createBottomTabNavigator();
 
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
+
 const TAB_ICON = {
   Restaurants: "md-restaurant",
   Map: "md-map",
