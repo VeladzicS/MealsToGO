@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import { firebase } from "@firebase/app";
-import { auth, signInWithEmailAndPassword } from "@firebase/auth";
 import { theme } from "./src/infrastructure/theme";
 import {
   useFonts as useOswald,
@@ -13,6 +12,7 @@ import { RestaurantsContextProvider } from "./src/services/restaurants/restauran
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { Navigation } from "./src/infrastructure/navigation";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthContextProvider } from "./src/services/auth/auth.context";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -36,22 +36,6 @@ if (!firebase.apps.length) {
 }
 
 export default function App() {
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("mo@binni.io", "test123")
-        .then((user) => {
-          setIsAuth(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }, 2000);
-  }, []);
-
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -63,16 +47,19 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
